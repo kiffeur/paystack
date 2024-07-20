@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const userRoutes = require('../api/routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,7 +30,10 @@ app.post('/api/register', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Accept-Language, Accept-Encoding');
-  res.send(201);
+    res.send({
+        status: true,
+        code: 201,
+    });
 });
 
 // Middleware
@@ -40,14 +43,14 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/payspark')
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch(err => {
-    console.error('Error connecting to MongoDB', err);
-  });
+// mongoose.connect('mongodb://localhost:27017/payspark')
+//   .then(() => {
+//     console.log('Connected to MongoDB');
+//   })
+//   .catch(err => {
+//     console.error('Error connecting to MongoDB', err);
+//   });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port http://localhost:${PORT}`);
 });
