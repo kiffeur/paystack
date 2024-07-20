@@ -1,8 +1,8 @@
 const express = require('express');
-const { registerUser, loginUser } = require('../api/controllers/userController');
-const Plan = require('../api/models/Plan');
-const User = require('../api/models/User'); // Ajoutez cette ligne pour importer le modèle User si nécessaire
-const Transaction = require('../api/models/Transaction'); // Ajoutez cette ligne si vous avez un modèle Transaction
+const { registerUser, loginUser } = require('../controllers/userController');
+const Plan = require('../models/Plan');
+const User = require('../models/User'); // Ajoutez cette ligne pour importer le modèle User si nécessaire
+const Transaction = require('../models/Transaction'); // Ajoutez cette ligne si vous avez un modèle Transaction
 
 const router = express.Router();
 
