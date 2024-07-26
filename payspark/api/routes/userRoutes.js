@@ -19,6 +19,9 @@ router.post('/register', registerUser);
 // Login route
 router.post('/login', loginUser);
 
+//router.get('/id', getUserById);
+
+
 // Route pour récupérer le solde du compte
 router.get('/balance', async (req, res) => {
     try {

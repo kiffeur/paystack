@@ -7,17 +7,16 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     inviteCode: { type: String, required: true, unique: true },
     invitedBy: { type: String, default: null },
+    revenusProjet: { type: Number, default: 0 },
+    totalRetrait: { type: Number, default: 0 },
+    invitations: { type: Number, default: 0 },
+    soldeTotal: { type: Number, default: 0 },
 });
 
-// Hash password before saving
-userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) {
-        return next();
-    }
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
+userSchema.methods.updateSoldeTotal = function() {
+    this.soldeTotal = this.revenusProjet + this.invitations;
+    return this.save();
+};
 
 const User = mongoose.model('User', userSchema);
 

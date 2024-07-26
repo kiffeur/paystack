@@ -1,4 +1,5 @@
 require('dotenv').config();
+//import 'dotenv/config';
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -43,13 +44,13 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 // MongoDB connection
-// mongoose.connect('mongodb://localhost:27017/payspark')
-//   .then(() => {
-//     console.log('Connected to MongoDB');
-//   })
-//   .catch(err => {
-//     console.error('Error connecting to MongoDB', err);
-//   });
+mongoose.connect('mongodb://localhost:27017/payspark')
+   .then(() => {
+     console.log('Connected to MongoDB');
+   })
+   .catch(err => {
+     console.error('Error connecting to MongoDB', err);
+  });
 
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
