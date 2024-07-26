@@ -1,5 +1,5 @@
 const express = require('express');
-const {registerUser, loginUser} = require('../controllers/userController');
+const {registerUser, loginUser, getUserById, getUserByPhone} = require('../controllers/userController');
 const Plan = require('../models/Plan');
 const User = require('../models/User'); // Ajoutez cette ligne pour importer le modèle User si nécessaire
 const Transaction = require('../models/transaction'); // Ajoutez cette ligne si vous avez un modèle Transaction
@@ -20,6 +20,12 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 
 //router.get('/id', getUserById);
+
+router.get('/:id', getUserById);
+
+// route récupérer utilisateur par le numéro
+
+router.get('/:phone', getUserByPhone);
 
 
 // Route pour récupérer le solde du compte
@@ -138,5 +144,7 @@ router.get('/plans', async (req, res) => {
         res.status(500).json({message: 'Erreur de serveur'});
     }
 });
+
+
 
 module.exports = router;
