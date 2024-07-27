@@ -4,9 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
-
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+
 
 //Add CORS middleware
 app.use((req, res, next) => {

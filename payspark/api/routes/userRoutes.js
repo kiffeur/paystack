@@ -1,5 +1,5 @@
 const express = require('express');
-const {registerUser, loginUser, getUserById, getUserByPhone} = require('../controllers/userController');
+const {registerUser, loginUser, getUserById, getUserByPhone, auth} = require('../controllers/userController');
 const Plan = require('../models/Plan');
 const User = require('../models/User'); // Ajoutez cette ligne pour importer le modèle User si nécessaire
 const Transaction = require('../models/transaction'); // Ajoutez cette ligne si vous avez un modèle Transaction
@@ -26,6 +26,8 @@ router.get('/:id', getUserById);
 // route récupérer utilisateur par le numéro
 
 router.get('/:phone', getUserByPhone);
+
+//router.get('/me', auth, getUserById);
 
 
 // Route pour récupérer le solde du compte

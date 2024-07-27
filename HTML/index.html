@@ -35,41 +35,32 @@
         </div>
         <div class="pageTitle">
             <img src="assets/img/logo.png" alt="logo" class="logo">
-        </div>
-        <!-- <div class="right">
-            <a href="app-notifications.html" class="headerButton">
-                <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                <span class="badge badge-danger">4</span>
-            </a>
-            <a href="app-settings.html" class="headerButton">
-                <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged w32">
-                <span class="badge badge-danger">6</span>
-            </a>
-        </div> -->
+        </div>     
     </div>
-    <!-- * App Header -->
 
 
-    <!-- App Capsule -->
+
+    <!--------------------- En tete de l'application ------------------------------>
+
     <div id="appCapsule">
-
-        <!-- Wallet Card -->
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
-                <!-- Balance -->
+
+                <!---------------- Solde du compte en En tete et autre  ------------------------------->
                 <div class="balance">
                     <div class="left">
                         <span class="title">Solde Total</span>
-                        <h1 class="total">2,562.50 FCFA</h1>
+                        <h1 class="total" id="solde-total">2,562.50 FCFA</h1>
                     </div>
                     <div class="right">
-                        <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
+                        <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
                             <ion-icon name="add-outline"></ion-icon>
                         </a>
                     </div>
                 </div>
-                <!-- * Balance -->
-                <!-- Wallet Footer -->
+
+
+                <!--------------------------- Action de retrait ------------------------- -->
                 <div class="wallet-footer">
                     <div class="item">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">
@@ -79,6 +70,8 @@
                             <strong>Retrait</strong>
                         </a>
                     </div>
+
+                      <!--------------------------- Action de recharge ------------------------- -->
                     <div class="item">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
                             <div class="icon-wrapper">
@@ -87,6 +80,8 @@
                             <strong>Recharge</strong>
                         </a>
                     </div>
+
+                    <!--------------------------- Partager le lien ------------------------- -->
                     <div class="item">
                         <a href="app-qr-code.html">
                             <div class="icon-wrapper bg-success">
@@ -94,126 +89,12 @@
                             </div>
                             <strong>Partager le lien</strong>
                         </a>
-                    </div>
-                    <!--<div class="item">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exchangeActionSheet">
-                            <div class="icon-wrapper bg-warning">
-                                <ion-icon name="swap-vertical"></ion-icon>
-                            </div>
-                            <strong>Exchange</strong>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- * Wallet Footer -->
+                    </div>                   
             </div>
         </div>
-        <!-- Wallet Card -->
-
-        <!-- Deposit Action Sheet -->
-        <div class="modal fade action-sheet" id="depositActionSheet" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Balance</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="action-sheet-content">
-                            <form>
-                                <div class="form-group basic">
-                                    <div class="input-wrapper">
-                                        <label class="label" for="account1">From</label>
-                                        <select class="form-control custom-select" id="account1">
-                                            <option value="0">Savings (*** 5019)</option>
-                                            <option value="1">Investment (*** 6212)</option>
-                                            <option value="2">Mortgage (*** 5021)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <label class="label">Enter Amount</label>
-                                    <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addona1">$</span>
-                                        <input type="text" class="form-control" placeholder="Enter an amount"
-                                            value="100">
-                                    </div>
-                                </div>
 
 
-                                <div class="form-group basic">
-                                    <button type="button" class="btn btn-primary btn-block btn-lg"
-                                        data-bs-dismiss="modal">Deposit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- * Deposit Action Sheet -->
-
-        <!-- Withdraw Action Sheet -->
-        <div class="modal fade action-sheet" id="withdrawActionSheet" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        
-                        <h5 class="modal-title">Retirer de l'argent</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="action-sheet-content">
-                            <form>
-                                <!-- <div class="form-group basic">
-                                    <div class="input-wrapper">
-                                        <label class="label" for="account2d">From</label>
-                                        <select class="form-control custom-select" id="account2d">
-                                            <option value="0">Savings (*** 5019)</option>
-                                            <option value="1">Investment (*** 6212)</option>
-                                            <option value="2">Mortgage (*** 5021)</option>
-                                        </select>
-                                    </div>
-                                </div> -->
-
-                                <div class="form-group basic">
-                                    <div class="input-wrapper">
-                                        <label class="label" for="text11d">Téléphonne</label>
-                                        <input type="email" class="form-control" id="text11d" placeholder="Entrer votre numéro de téléphonne">
-                                        <i class="clear-input">
-                                            <ion-icon name="close-circle"></ion-icon>
-                                        </i>
-                                    </div>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <label class="label">Entre le montant</label>
-                                    <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addonb1">FCFA</span>
-                                        <input type="text" class="form-control" placeholder="Enter an amount"
-                                            value="1500">
-                                    </div>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <button type="button" class="btn btn-primary btn-block btn-lg"
-                                        data-bs-dismiss="modal" onclick="window.location.href='app-transaction-verification.html'">Lancer le retrait</button>
-                                </div>
-                                
-
-                                <!-- <div class="form-group basic">
-                                    <!-- <a href="app-transaction-verification.html"></a> -->
-                                    <!-- <button type="button" class="btn btn-primary btn-block btn-lg"
-                                        data-bs-dismiss="modal" >Lancer le retrait</button>
-                                </div>  -->
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- * Withdraw Action Sheet -->
-
-        <!-- Send Action Sheet -->
+        <!------------------ Formulaire pour le dépot ------------->
         <div class="modal fade action-sheet" id="sendActionSheet" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -263,23 +144,126 @@
                 </div>
             </div>
         </div>
-        <!-- * Send Action Sheet -->
+        <!-- Fin formulaire dépot -->
+
+
+
+
+
+        <!--------------------------- Formulaire de retrait -------------------->
+        <div class="modal fade action-sheet" id="withdrawActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h5 class="modal-title">Retirer de l'argent</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="text11d">Téléphonne</label>
+                                        <input type="email" class="form-control" id="text11d" placeholder="Entrer votre numéro de téléphonne">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Entre le montant</label>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text" id="basic-addonb1">FCFA</span>
+                                        <input type="text" class="form-control" placeholder="Enter an amount"
+                                            value="1500">
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-bs-dismiss="modal" onclick="window.location.href='app-transaction-verification.html'">Lancer le retrait</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--------------- Recharger le compte formulaire --------------->
+
+        <div class="modal fade action-sheet" id="sendActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Recharger le compte</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account2">Numéro de dépot</label>
+                                        <select class="form-control custom-select" id="account2">
+                                            <option value="0">Numéro ORANGE : #150*numéro#</option>
+                                            <option value="1">Numéro MTN : #150*numéro#</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="text11">ID transaction</label>
+                                        <input type="email" class="form-control" id="text11"
+                                            placeholder="Enter l'ID de la transaction">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Entrer le montant</label>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text" id="basic-addon1">FCFA</span>
+                                        <input type="text" class="form-control" placeholder="Entrer le montant"
+                                            value="1500">
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg" onclick="window.location.href='index.html'"
+                                        data-bs-dismiss="modal">Effectuer la recharge</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- recharger le compte -->
 
        
 
-        <!-- Stats -->
+
+
+        <!--------- information sur les différents solde de compte ------->
         <div class="section">
             <div class="row mt-2">
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Revenus projet</div>
-                        <div class="value text-success">45,000 FCFA</div>
+                        <div class="title" >Revenus projet</div>
+                        <div class="value text-success" id="revenusProjet" >45,000 FCFA</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
                         <div class="title">Total retrait</div>
-                        <div class="value text-danger">58,500 FCFA</div>
+                        <div class="value text-danger" id="totalRetrait" >58,500 FCFA</div>
                     </div>
                 </div>
             </div>
@@ -287,12 +271,16 @@
                 <div class="col-6">
                     <div class="stat-box">
                         <div class="title">Invitations</div>
-                        <div class="value">20,000 FCFA</div>
+                        <div class="value" id="invitations" >20,000 FCFA</div>
                     </div>
                 </div>
             
         </div>
-        <!-- * Stats -->
+
+        <!-- fin solde de compte info -->
+
+
+
 
         <!-- Transactions -->
         <div class="section mt-4">
@@ -504,7 +492,7 @@
                     <div class="sidebar-balance">
                         <div class="listview-title">Solde Total</div>
                         <div class="in">
-                            <h1 class="amount">2,562.50 FCFA</h1>
+                            <h1 class="amount" id="solde-total">2,562.50 FCFA</h1>
                         </div>
                     </div>
                     
@@ -633,91 +621,107 @@
 
     <script>
       
-// Fonction pour charger les informations de l'utilisateur
-/*async function loadUserInfo(userId) {
-    try {
-        console.log(`Envoi de la requête pour l'utilisateur avec ID: ${userId}`);
-        const response = await fetch(`/api/user/${userId}`);
-        console.log('Réponse de l\'API:', response);
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des informations utilisateur');
-        }
-        const user = await response.json();
-        console.log('Utilisateur récupéré:', user);
+// Récupérer le token
 
-        // Mettre à jour les éléments de la page avec les informations récupérées
-        document.getElementById("user-name").textContent = user.name;
-        document.getElementById("user-id").textContent = user._id;
-    } catch (error) {
-        console.error('Erreur:', error);
-    }
-}
+//   const token = localStorage.getItem('token');
+//   const userId = localStorage.getItem('id');
+//    console.log('votre token est : ' ,token);
+//    console.log('votre id est :', userId);
 
-// Fonction pour initialiser la page après la connexion de l'utilisateur
-function initializePage() {
-    // Récupérer l'ID utilisateur stocké dans localStorage
-    const userId = localStorage.getItem('userId');
-    console.log('ID utilisateur récupéré de localStorage:', userId);
-    if (userId) {
-        // Charger les informations de l'utilisateur si l'ID est disponible
-        loadUserInfo(userId);
-    } else {
-        console.error('ID utilisateur non trouvé dans localStorage');
-    }
-}
+//   // Vérifier si le token est valide
+//   if (!token || token === 'undefined' || token === '') {
 
-// Appeler la fonction d'initialisation lorsque la page est complètement chargée
-document.addEventListener('DOMContentLoaded', initializePage);
-*/
+// console.log('Aucun token trouvé, redirection vers la page de login');
 
-// Fonction pour charger les informations de l'utilisateur
-async function loadUserInfo(userId) {
-  try {
-    console.log(`Envoi de la requête pour l'utilisateur avec ID: ${userId}`);
-    const response = await fetch(`/api/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    console.log('Réponse de l\'API:', response);
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des informations utilisateur');
-    }
-    const user = await response.json();
-    console.log('Utilisateur récupéré:', user);
+// window.location.href = 'app-login.html';
 
-    // Mettre à jour les éléments de la page avec les informations récupérées
-    document.getElementById("user-name").textContent = user.name;
-    document.getElementById("user-id").textContent = user._id;
-  } catch (error) {
-    console.error('Erreur:', error);
-    // If the token is invalid or expired, redirect to login page
-    if (error.status === 401) {
-      window.location.href = 'app-login.html';
-    }
+// } else {
+
+// // Vérifier si le token a expiré
+
+// const tokenExpiration = JSON.parse(atob(token.split('.')[1])).exp;
+// const currentTime = Math.floor(Date.now() / 1000);
+
+// if (tokenExpiration < currentTime) {
+//   console.log('Token expiré, redirection vers la page de login');
+
+//   window.location.href = 'app-login.html';
+// } else {
+//   console.log('Token valide, autorisation accordée');
+// }
+// }
+
+// // faire la vérification au niveau de l'api
+
+// fetch(`http://localhost:5000/api/users/${userId}`, {
+//   method: 'GET',
+//   mode: 'cors',
+//   headers: {
+//     'Accept': '*/*',
+//     'Authorization': `Bearer ${token}`,
+//     'Content-Type': 'application/json',
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Headers': 'X-Token, Content-Type'
+//   }
+// })
+// .then(response => response.json())
+// .then(data => {
+//   console.log('Token is valid!');
+//   console.log(data); // log the user data
+// })
+// .catch(error => console.error(error));
+
+
+const token = localStorage.getItem('token');
+const userId = localStorage.getItem('id');
+
+console.log('Your token is:', token);
+console.log('Your ID is:', userId);
+
+// Vérifie si le token est valide
+
+if (!token || token === 'undefined' || token === '') {
+  console.log('No token found, redirecting to login page');
+  window.location.href = 'app-login.html';
+} else {
+
+  // Envoi la requète à l'Api
+
+  fetch(`http://localhost:5000/api/users/${userId}`, {
+  method: 'GET',
+  mode: 'cors',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
   }
-}
+})
+.then(response => {
+  console.log('Response status:', response.status);
+  console.log('Response headers:', response.headers);
+  return response.json();
+})
+.then(data => {
+  console.log('Token is valid!');
+  console.log(data); // log the user data
 
-// Fonction pour initialiser la page après la connexion de l'utilisateur
-function initializePage() {
-  // Récupérer l'ID utilisateur et le token stockés dans localStorage
-  const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token');
-  console.log('ID utilisateur récupéré de localStorage:', userId);
-  console.log('Token récupéré de localStorage:', token);
-  if (userId && token) {
-    // Charger les informations de l'utilisateur si l'ID et le token sont disponibles
-    loadUserInfo(userId);
-  } else {
-    console.error('ID utilisateur ou token non trouvé dans localStorage');
-    // Redirect to login page if no token or userId is found
+  // Update HTML elements with user data
+
+  document.getElementById('user-name').innerHTML = data.name;
+  document.getElementById('user-id').innerHTML = userId;
+  document.getElementById('solde-total').innerHTML = data.soldeTotal +" " + "FCFA";
+  document.getElementById('revenusProjet').innerHTML = data.revenusProjet;
+  document.getElementById('totalRetrait').innerHTML = data.totalRetrait;
+  document.getElementById('invitations').innerHTML = data.invitations;
+
+})
+.catch(error => {
+  console.error('Error:', error);
+  if (error.status === 401) {
+    console.log('Invalid token, redirecting to login page');
     window.location.href = 'app-login.html';
   }
+});
 }
-
-// Appeler la fonction d'initialisation lorsque la page est complètement chargée
-document.addEventListener('DOMContentLoaded', initializePage);
-
 
     </script>
 

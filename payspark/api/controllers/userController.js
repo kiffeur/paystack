@@ -182,12 +182,7 @@ exports.loginUser = async (req, res) => {
 
 
 //--------------------------------------------------------------------------------
-
-
-
-
 // Fonction pour obtenir un utilisateur par ID
-
 /*exports.getUserById = async (req, res) => {
   try {
       const user = await User.findById(req.params.id);
@@ -200,63 +195,95 @@ exports.loginUser = async (req, res) => {
   }
 };
 */
-exports.getUserById = async (req, res) => {
+
+/*exports.getUserById = async (req, res) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: no token provided' });
+  }
+
   try {
-    // Vérification du token
-    const token = req.headers['authorization'];
-    if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // store the decoded user in the request object
 
-    // Vérification de la validité du token
-    const decoded = jwt.verify(token, 'mireilebeatrice');
-    req.userId = decoded.userId;
-
-    // Récupération de l'utilisateur par ID
     const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
-
     res.json(user);
   } catch (error) {
-    console.error('Erreur lors de la récupération des informations utilisateur:', error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
     res.status(500).json({ message: 'Erreur du serveur' });
   }
 };
-
-//--------------------------------------------------------------------------------------
-
+*/
 
 
+//-------------------------------------------------------------------------------------
+//RECENT CODE QUE J'UTILISAIS 
+/*exports.getUserById = async (req, res) => {
+  const token = req.headers['authorization'].split(' ')[1]; // Extract token without Bearer prefix
+  console.log('Received token:', token);
 
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: no token provided' });
+  }
 
-
-
- // Récupérer un utilisateur par numéro de téléphone
-/*exports.getUserByPhone = async (req, res) => {
   try {
-      const phone = req.params.phone;
-      console.log(`Requête reçue pour le numéro de téléphone: ${phone}`);
-      
-      // Vérifier si le numéro de téléphone est correctement formaté
-      console.log(`Recherche de l'utilisateur avec le numéro de téléphone: ${phone}`);
-      
-      const user = await User.findOne({ phone: phone });
-      console.log('Utilisateur trouvé:', user);
-      
-      if (!user) {
-          console.log('Utilisateur non trouvé');
-          return res.status(404).json({ message: 'Utilisateur non trouvé' });
-      }
-      
-      res.json(user);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded token:', decoded);
+    req.user = decoded; // store the decoded user in the request object
+
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
   } catch (error) {
-      console.error('Erreur lors de la récupération des informations utilisateur:', error);
-      res.status(500).json({ message: 'Erreur du serveur' });
+    console.error('Error verifying token:', error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+    res.status(500).json({ message: 'Server error' });
   }
 };
 */
+
+//--------------------------------------------------------------------------------------
+
+exports.getUserById = async (req, res) => {
+
+  const token = req.headers['authorization'].split(' ')[1]; // Extract token without Bearer prefix
+  console.log('Received token:', token);
+
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: no token provided' });
+  }
+  const secretKey = process.env.SECRET_KEY || 'mireilebeatrice'; // Replace with your secret key
+  try {
+    const decoded = jwt.verify(token, secretKey); // Provide the secret key to jwt.verify()
+    console.log('Decoded token:', decoded);
+    req.user = decoded; // store the decoded user in the request object
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+    res.status(500).json({ message: 'Server error' });
+
+  }
+
+};
+
+
 
 // exports.getUserByPhone = async (req, res) => {
   exports.getUserByPhone = async (req, res) => {
@@ -297,32 +324,3 @@ exports.getUserById = async (req, res) => {
     }
   };
 
-
- // Middleware to verify token
-
-// async function verifyToken(req, res, next) {
-
-//   const token = req.headers['authorization'];
-
-//   if (!token) {
-
-//     return res.status(401).json({ message: 'Unauthorized' });
-
-//   }
-
-
-//   try {
-
-//     const decoded = jwt.verify(token, 'mireilebeatrice');
-
-//     req.userId = decoded.userId;
-
-//     next();
-
-//   } catch (error) {
-
-//     return res.status(401).json({ message: 'Invalid token' });
-
-//   }
-
-// }

@@ -124,217 +124,66 @@
 
 
     <script>
-        // fonction de login
-        
-        // document.getElementById('loginForm').addEventListener('submit', async function (e) {
-        //   e.preventDefault();
-      
-        //   const phone = document.getElementById('phoneNumber').value;
-        //   const password = document.getElementById('password').value;
-      
-        //   if (!phone || !password) {
-        //     alert("Veuillez remplir tous les champs");
-        //     return;
-        //   }
-      
-        //   try {
-        //     const response = await fetch('http://localhost:5000/api/users/login', {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //         'Accept': '*/*'
-        //       },
-        //       body: JSON.stringify({ phone, password })
-        //     });
-      
-        //     if (response.ok) {
-        //       const data = await response.json();
-        //       alert('Connexion réussie!');
-        //       // Redirection après succès
-        //       window.location.href = 'index.html';
-        //     } else {
-        //       const errorData = await response.json();
-        //       alert('Erreur de connexion: ' + errorData.message);
-        //     }
-        //   } catch (error) {
-        //     console.error('Erreur de connexion au serveur:', error);
-        //     alert('Erreur de connexion au serveur');
-        //   }
-        // });
+        // fonction de login       
 
-//         document.getElementById('loginForm').addEventListener('submit', async function (e) {
+ document.getElementById('loginForm').addEventListener('submit', async function (e) {
+   e.preventDefault();
 
-// e.preventDefault();
+   const phone = document.getElementById('phoneNumber').value;
+   const password = document.getElementById('password').value;
 
-
-// const phone = document.getElementById('phoneNumber').value;
-
-// const password = document.getElementById('password').value;
-
-
-// if (!phone || !password) {
-
-//   alert("Veuillez remplir tous les champs");
-
-//   return;
-
-// }
-
-
-// try {
-
-//   const response = await fetch('http://localhost:5000/api/users/login', {
-
-//     method: 'POST',
-
-//     headers: {
-
-//       'Content-Type': 'application/json',
-
-//       'Accept': '*/*'
-
-//     },
-
-//     body: JSON.stringify({ phone, password })
-
-//   });
-
-
-//   if (response.ok) {
-
-//     const data = await response.json();
-
-//     alert('Connexion réussie!');
-
-
-//     // Stocker les informations de connexion dans le localStorage
-
-//     localStorage.setItem('userId', data._id);
-
-//     localStorage.setItem('username', data.username);
-
-//     // Logger les informations stockées dans le localStorage
-
-//     console.log('Informations stockées dans le localStorage:');
-
-// console.log('userId:', localStorage.getItem('userId'));
-
-// console.log('username:', localStorage.getItem('username'));
-
-
-// //...
-
-//     // ...
-
-
-//     // Redirection après succès
-
-//     window.location.href = 'index.html';
-
-//   } else {
-
-//     const errorData = await response.json();
-
-//     alert('Erreur de connexion: ' + errorData.message);
-
-//   }
-
-// } catch (error) {
-
-//   console.error('Erreur de connexion au serveur:', error);
-
-//   alert('Erreur de connexion au serveur');
-
-// }
-
-// });
-
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
-
-e.preventDefault();
-
-
-const phone = document.getElementById('phoneNumber').value;
-
-const password = document.getElementById('password').value;
-
-
-if (!phone ||!password) {
-
-  alert("Veuillez remplir tous les champs");
-
-  return;
-
-}
-
-
-try {
-
-  const response = await fetch('http://localhost:5000/api/users/login', {
-
-    method: 'POST',
-
-    headers: {
-
-      'Content-Type': 'application/json',
-
-      'Accept': '*/*'
-
-    },
-
-    body: JSON.stringify({ phone, password })
-
-  });
-
-
-  if (response.ok) {
-
-    const data = await response.json();
-
-    const token = data.token;
-
-
-    // Store the token in localStorage
-
-    localStorage.setItem('token', token);
-
-
-    alert('Connexion réussie!');
-
-
-    // Log the stored token
-
-    console.log('Token stocké dans le localStorage:');
-
-    console.log('token:', localStorage.getItem('token'));
-
-
-    // Redirection après succès
-
-    window.location.href = 'index.html';
-
-  } else {
-
-    const errorData = await response.json();
-
-    alert('Erreur de connexion: ', errorData.message);
-
+   if (!phone || !password) {
+     alert("Veuillez remplir tous les champs");
+    return;
   }
 
-} catch (error) {
+  try {
+    const response = await fetch('http://localhost:5000/api/users/login', {
+     method: 'POST',
+     headers: {
+        'Content-Type': 'application/json',
+       'Accept': '*/*'
+    },
+     body: JSON.stringify({ phone, password })
+   });
 
-  console.error('Erreur de connexion au serveur:', error);
+   if (response.ok) {
+      const data = await response.json();
+      const token = data.token;
+      const user = data.user;
+      const id = user.id;
 
-  alert('Erreur de connexion au serveur');
+        //Store the token in Session Storage
+        localStorage.setItem('token', token);
+        localStorage.setItem('id', id);
 
-}
+        //Log the stored token
 
-});
+       console.log('Token stocké en local Storage:');
+       console.log('token:', token);
+       console.log('et son id est :', id);
+
+       alert('Connexion réussie!');
+
+        //Redirection après succès
+        
+       window.location.href = 'index.html';
+
+     } else {
+      const errorData = await response.json();
+      alert('Erreur de connexion: ', errorData.message);
+     }
+  } catch (error) {
+     console.error('Erreur de connexion au serveur:', error);
+    alert('Erreur de connexion au serveur');
+  }
+ });
+
+
+
 
       </script>
       
-
-
 </body>
 
 </html>
