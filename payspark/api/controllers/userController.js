@@ -89,7 +89,7 @@ exports.loginUser = async (req, res) => {
 };
 
 */
-
+const Transaction = require('../models/transaction');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
@@ -324,3 +324,30 @@ exports.getUserById = async (req, res) => {
     }
   };
 
+
+  exports.createTransaction = async (req, res) => {
+
+    try {
+      const userId = req.params.userId;
+      const { type, amount, description, date } = req.body;
+  
+      // Create a new transaction
+      const transaction = new Transaction({
+          userId,
+          type,
+          amount,
+          description,
+          date,
+      });
+    
+      // Save the transaction to the database
+      await transaction.save();
+      // Send the transaction as a response
+      res.status(201).json(transaction);
+    } catch (error) {  
+      console.error('Error creating transaction:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  
+    }
+  
+  };

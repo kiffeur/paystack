@@ -11,12 +11,11 @@ const userSchema = new mongoose.Schema({
     totalRetrait: { type: Number, default: 0 },
     invitations: { type: Number, default: 0 },
     soldeTotal: { type: Number, default: 0 },
+    subscribedPlans: [{planId: {type: mongoose.Schema.Types.ObjectId, ref: 'Plan'},startDate: Date,
+    endDate: Date}]
 });
 
-userSchema.methods.updateSoldeTotal = function() {
-    this.soldeTotal = this.revenusProjet + this.invitations;
-    return this.save();
-};
+
 
 const User = mongoose.model('User', userSchema);
 

@@ -1,6 +1,6 @@
 {
     "name": "PaySpark",
-    "short_name": "Finapp",
+    "short_name": "PaySpark",
     "start_url": "PaySpark",
     "display": "standalone",
     "scope" : "/",

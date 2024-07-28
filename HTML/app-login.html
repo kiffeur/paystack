@@ -136,7 +136,7 @@
      alert("Veuillez remplir tous les champs");
     return;
   }
-
+localStorage.key
   try {
     const response = await fetch('http://localhost:5000/api/users/login', {
      method: 'POST',
@@ -151,17 +151,23 @@
       const data = await response.json();
       const token = data.token;
       const user = data.user;
-      const id = user.id;
+      const userId = user.id;
+      const name = user.name;
+      const phone = user.phone;
+    
 
         //Store the token in Session Storage
+        
         localStorage.setItem('token', token);
-        localStorage.setItem('id', id);
-
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('name', name);
         //Log the stored token
 
-       console.log('Token stocké en local Storage:');
+       console.log('Token et autres informations ont été stocké en Session Storage:');
        console.log('token:', token);
-       console.log('et son id est :', id);
+       console.log('et son nom :', name);
+       console.log('et son téléphone', phone);
 
        alert('Connexion réussie!');
 
