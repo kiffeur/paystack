@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const plansRoutes = require('./routes/plan');
+const User = require('./models/User');
 //const TransactionsRoutes = require('./routes/TransactionRoutes');
 const cors = require('cors');
-const dailyReturns = require('./cronJobs/dailyReturns');
+//const dailyReturns = require('./cronJobs/dailyReturns');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -18,10 +19,7 @@ app.use(bodyParser.json());
 
 
 
-//const cron = require('node-cron');
-//cron.schedule('0 0 * * *', dailyReturns); // run daily at 00:00
 
-//app.use('/api/transactions', TransactionsRoutes);
 app.use('/api', subscriptionRoutes);
 //Add CORS middleware
 app.use((req, res, next) => {
@@ -54,10 +52,44 @@ app.post('/api/register', (req, res) => {
 
 
 
+//------------------------------------------------------------------------------------------------
+
+
+
+// Withdrawal endpoint
+app.post('/api/users/:id/withdraw', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const amount = req.body.amount;
+
+    if (amount < 1500) {
+      return res.status(400).json({ message: 'Minimum withdrawal is 1500' });
+    }
+
+    const user = await User.findById(userId);
+    console.log(user.name + " " + 'possède la somme de :', user.soldeTotal);
+    if (!user || user.soldeTotal < amount) {
+      return res.status(400).json({ message: 'Insufficient funds' });
+    }
+
+    user.soldeTotal -= amount;
+    user.totalRetrait += amount;
+    await user.save();
+
+    res.status(200).json({ message: 'Withdrawal successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/Plans', subscriptionRoutes);
 app.use('/api/plan', plansRoutes);
+
+
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/payspark')

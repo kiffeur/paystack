@@ -181,47 +181,6 @@ exports.loginUser = async (req, res) => {
 };
 
 
-
-//--------------------------------------------------------------------------------
-// Fonction pour obtenir un utilisateur par ID
-/*exports.getUserById = async (req, res) => {
-  try {
-      const user = await User.findById(req.params.id);
-      if (!user) {
-          return res.status(404).json({ message: 'Utilisateur non trouvé' });
-      }
-      res.json(user);
-  } catch (error) {
-      res.status(500).json({ message: 'Erreur du serveur' });
-  }
-};
-*/
-
-/*exports.getUserById = async (req, res) => {
-  const token = req.headers['authorization'];
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized: no token provided' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // store the decoded user in the request object
-
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'Utilisateur non trouvé' });
-    }
-    res.json(user);
-  } catch (error) {
-    if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
-    res.status(500).json({ message: 'Erreur du serveur' });
-  }
-};
-*/
-
-
 //-------------------------------------------------------------------------------------
 //RECENT CODE QUE J'UTILISAIS 
 /*exports.getUserById = async (req, res) => {
@@ -283,8 +242,6 @@ exports.getUserById = async (req, res) => {
   }
 
 };
-
-
 
 // exports.getUserByPhone = async (req, res) => {
   exports.getUserByPhone = async (req, res) => {
@@ -405,3 +362,10 @@ exports.getUserById = async (req, res) => {
     }
   
   };
+
+
+
+  //Effectuer un retrait
+
+  console.log("nous sommes dans le controller");
+
