@@ -91,6 +91,7 @@ exports.loginUser = async (req, res) => {
 */
 const Transaction = require('../models/transaction');
 const User = require('../models/User');
+const Plan = require('../models/Plan');
 const jwt = require('jsonwebtoken');
 
 const generateInviteCode = () => {
@@ -324,29 +325,82 @@ exports.getUserById = async (req, res) => {
     }
   };
 
+/*--------------------------------- C'est bon à ce niveau ci --------------------------------------*/
 
-  exports.createTransaction = async (req, res) => {
 
-    try {
-      const userId = req.params.userId;
-      const { type, amount, description, date } = req.body;
+
+
+  /*-------------------------------------- les vraies chosent commencent ---------------------------------------*/
+
+
+ /* exports.payForPlan = async (req, res, next) => {
+
+    const userId = req.body.userId;
+    const planId = req.body.planId;
+    const paymentAmount = req.body.paymentAmount;
   
-      // Create a new transaction
-      const transaction = new Transaction({
-          userId,
-          type,
-          amount,
-          description,
-          date,
+    try {
+      const user = await User.findById(userId);
+      const plan = await Plan.findById(planId);
+
+      if (!user ||!plan) {
+        return res.status(404).send({ message: 'User or plan not found' });
+      } 
+
+      // Vérifie si le montant est suffisant pour effectuer la transaction
+      if (user.soldeTotal < paymentAmount) { 
+        return res.status(400).send({ message: 'Insufficient balance' });
+      }
+  
+  
+      // Create a new subscription  
+      const subscription = new Subscription({  
+        userId: user._id,  
+        planId: plan._id,  
+        startDate: new Date(),
+        endDate: new Date(Date.now() + plan.duration * 24 * 60 * 60 * 1000), // Calcule la date de fin basé sur la durée du plan 
       });
-    
-      // Save the transaction to the database
-      await transaction.save();
-      // Send the transaction as a response
-      res.status(201).json(transaction);
-    } catch (error) {  
-      console.error('Error creating transaction:', error);
-      res.status(500).json({ message: 'Internal server error' });
+  
+  
+      await subscription.save();
+  
+  
+      // Mettre à jour Solde Total et revenusProjet  
+
+      user.soldeTotal -= paymentAmount;  
+      user.revenusProjet += paymentAmount; 
+      await user.save();
+  
+      res.send({ message: 'Payment successful' }); 
+    } catch (err) {
+
+      console.error(err);
+      res.status(500).send({ message: 'Error processing payment' });
+  
+    }
+  
+  };
+*/
+
+  exports.getSubscribedPlans = async (req, res, next) => {
+
+    const userId = req.params.userId;
+  
+    try {
+  
+      const user = await User.findById(userId);
+      const subscriptions = await Subscription.find({ userId: user._id });
+      const subscribedPlans = [];
+  
+      for (const subscription of subscriptions) {
+        const plan = await Plan.findById(subscription.planId);
+        subscribedPlans.push(plan);
+  
+      }
+      res.send(subscribedPlans);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ message: 'Error retrieving subscribed plans' });
   
     }
   

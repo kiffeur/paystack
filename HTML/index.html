@@ -371,7 +371,7 @@
                                 </div>
                                 <div class="price">10.000 FCFA</div>
                                 <p>2000 FCFA H24 pendant 60 jours</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">Payer maintenant</a>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">+3.5k d'investisseurs</a>
                             </div>
                         </li>
 
@@ -382,7 +382,7 @@
                                 </div>
                                 <div class="price">15.000 FCFA</div>
                                 <p>3000 FCFA H24 pendant 60 jours</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">Payer maintenant</a>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">+1.5k d'investisseurs</a>
                             </div>
                         </li>
 
@@ -393,7 +393,7 @@
                                 </div>
                                 <div class="price">25.000 FCFA</div>
                                 <p>5000 FCFA H24 pendant 60 jours</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">Payer maintenant</a>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">+1k d'investisseurs</a>
                             </div>
                         </li>
 
@@ -405,7 +405,7 @@
                                 </div>
                                 <div class="price">50.000 FCFA</div>
                                 <p>10.000 FCFA H24 pendant 60 jours</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">Payer maintenant</a>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">+3k d'investisseurs</a>
                             </div>
                         </li>
 
@@ -631,6 +631,25 @@ const userId = localStorage.getItem('userId');
 const name = localStorage.getItem('name');
 const phone = localStorage.getItem('phone');
 
+//Sélectionnez tous les éléments de la liste de forfaits
+
+const billBoxes = document.querySelectorAll('.bill-box');
+
+
+// Ajoutez un événement click à chaque élément
+
+billBoxes.forEach((billBox) => {
+
+  billBox.addEventListener('click', () => {
+
+    // Rediriger l'utilisateur vers la page app-bills.html
+
+    window.location.href = 'app-bills.html';
+
+  });
+
+});
+
 if (!token || token === 'undefined' || token === '') {
   console.log('No token found, redirecting to login page');
   window.location.href = 'app-login.html';
@@ -693,6 +712,8 @@ if (!token || token === 'undefined' || token === '') {
       phoneElement.innerHTML = phone;
     }
 
+    
+
     //----------------------------------------------------------------------------------//
     //------------------------------Fin chargement des éléments-------------------------//
 
@@ -712,7 +733,6 @@ if (!token || token === 'undefined' || token === '') {
   });
 }
 
-//   const token = localStorage.getItem('token');
 //   const userId = localStorage.getItem('id');
 //    console.log('votre token est : ' ,token);
 //    console.log('votre id est :', userId);
