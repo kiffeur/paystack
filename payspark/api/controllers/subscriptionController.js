@@ -33,6 +33,8 @@ exports.subscribeUserToPlan = async (req, res) => {
     const newSubscription = new Subscription({
       userId,
       planId,
+      plan : plan.name,
+      statuts : true,
       startDate: new Date(),
       endDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
     });
@@ -47,7 +49,7 @@ exports.subscribeUserToPlan = async (req, res) => {
       amount: req.body.amount,
       plan: plan.name,
       date: new Date(),
-      description: `Souscription au forfait ${req.body.plan}`
+      description: `Souscription au forfait ${plan.name}`
     
     });
     
@@ -75,6 +77,7 @@ exports.subscribeUserToPlan = async (req, res) => {
         user.revenusProjet += benefice;
         await user.save();
       } else {
+        newSubscription.statuts = false;
         job.cancel();
       }
     });
