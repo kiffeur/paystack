@@ -10,23 +10,23 @@ const userSchema = new mongoose.Schema({
     revenusProjet: { type: Number, default: 0 },
     totalRetrait: { type: Number, default: 0 },
     invitations: { type: Number, default: 0 },
+    soldeCompte:{type : Number, default : 0},
     soldeTotal: { 
         type: Number,
          default: 0,
-        get: function(){
-            return this.revenusProjet + this.invitations;
-        } },
+         get: function() {
+          return (this.invitations + this.revenusProjet + this.soldeCompte) - this.totalRetrait;}},
     subscribedPlans: [{planId: {type: mongoose.Schema.Types.ObjectId, ref: 'Plan'},startDate: Date,
     endDate: Date}]
 });
 
 //-------------Mettre le solde Total à jour---------//
 
-userSchema.pre('save', function(next) {
-    this.soldeTotal = this.revenusProjet + this.invitations;
-    next();
-  
-  });
+/*userSchema.pre('save', function(next) {
+  this.soldeTotal = this.soldeCompte + this.revenusProjet + this.invitations - this.totalRetrait;
+  next();
+});
+*/
 
 //-------------Effectuer un retrait ---------//
 

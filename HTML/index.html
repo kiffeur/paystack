@@ -678,7 +678,8 @@ if (!token || token === 'undefined' || token === '') {
     const revenusProjet = data.revenusProjet;
     const totalRetrait = data.totalRetrait;
     const invitations = data.invitations;
-    const soldeTotal = data.soldeTotal;
+    const soldeCompte = data.soldeCompte;
+    const soldeTotal = (soldeCompte + invitations + revenusProjet) - totalRetrait;
     // console.log('votre nom est :', name + 'votre téléphone :', phone);
 
     // Update HTML elements with user data
