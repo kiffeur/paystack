@@ -1,0 +1,17 @@
+const mongoose = require('mongoose');
+
+const verificationChainSchema = new mongoose.Schema({
+  chain: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  used: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const VerificationChain = mongoose.model('VerificationChain', verificationChainSchema);
+
+module.exports = VerificationChain;

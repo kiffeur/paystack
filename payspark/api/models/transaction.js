@@ -8,7 +8,9 @@ const transactionSchema = new mongoose.Schema({
   amount: Number,
   plan: String,
   date: Date,
-  description: String
+  description: String,
+  verificationChain : String
+
 
 });
 

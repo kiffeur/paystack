@@ -9,12 +9,48 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
     <title>Finapp</title>
+    <style>
+        .container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bill-box {
+  flex: 1 1 calc(50% - 10px); /* 50% width minus 10px margin */
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.img-wrapper {
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status-active {
+  color: green;
+}
+
+.status-expired {
+  color: red;
+}
+      </style>
     <meta name="description" content="Finapp HTML Mobile Template">
     <meta name="keywords" content="bootstrap, wallet, banking, fintech mobile template, cordova, phonegap, mobile, html, responsive" />
     <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 </head>
 
 <body>
@@ -168,18 +204,7 @@
 
             <!-- paid tab -->
                <div class="tab-pane fade" id="paid" role="tabpanel">
-                <div class="row">
-                    <div class="col-6 mb-2">
-                        <div class="bill-box">
-                            <h4> <i> Pack Apogée </i> </h4>
-                            <div class="img-wrapper">
-                                <img src="assets/img/sample/brand/3.jpg" alt="img" class="image-block imaged w48">
-                            </div>
-                            <div class="price">500.000 FCFA</div>
-                            <p>100.000 FCFA H24 pendant 60 jours</p>
-                        </div>
-                    </div>
-                </div>
+                
                </div>
             <!-- * paid tab -->
 
@@ -232,7 +257,7 @@
     <script>
       
       // Récupérer les boutons "PAYER"
-
+const userId = localStorage.getItem('userId');
 const payButtons = document.querySelectorAll('.btn-primary');
 // Ajouter un événement click à chaque bouton
 
@@ -249,27 +274,91 @@ payButtons.forEach(button => {
 
     // Envoyer la requête POST avec les ID de l'utilisateur et du plan
     fetch('http://localhost:5000/api/' + localStorage.getItem('userId') + '/subscribe', {
-      method: 'POST',
-      body:JSON.stringify({ id }),
+  method: 'POST',
+  body: JSON.stringify({ id }),
+  headers: {
+    'Content-Type': 'application/json'
+  },
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Données reçues :', data);
+  
+  // Afficher un SweetAlert de succès
+  Swal.fire({
+    icon: 'success',
+    title: 'Abonnement réussi',
+    text: 'Votre abonnement a été effectué avec succès.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.reload();
+  });
+})
+.catch(error => {
+  console.error('Erreur :', error);
+
+  // Afficher un SweetAlert d'erreur
+  Swal.fire({
+    icon: 'error',
+    title: 'Erreur',
+    text: 'Une erreur est survenue lors de l\'abonnement.',
+    confirmButtonText: 'OK'
+  });
+});
+    
+  });
+
+});
+
+
+
+
+
+
+
+
+fetch('http://localhost:5000/api/subscriptions/' + localStorage.getItem('userId'),{
+      method: 'GET',
+      mode :'cors',
       headers: {
         'Content-Type': 'application/json'
       },
     })
    .then(response => response.json())
    .then(data => {
-      console.log('Données reçues :', data);
-    })
+      console.log(data);
+      
+      if (Array.isArray(data) && data.length > 0) {
+    // Utilisez data directement car il est déjà un tableau d'abonnements
+    const subscriptionHtml = data.map(subscription => {
+        const startDateFormatted = new Date(subscription.startDate).toLocaleDateString('fr-FR');
+        const endDateFormatted = new Date(subscription.endDate).toLocaleDateString('fr-FR');
+      return `
+       
+          
+            <div class="bill-box">
+              <h4><i>${subscription.plan}</i></h4>
+              <div class="price">${subscription.price || 'N/A'} FCFA</div>
+              <p class="${subscription.statuts ? 'status-active' : 'status-expired'}">
+                  ${subscription.statuts ? 'Projet actif' : 'Expiré'}
+             </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    console.log('Generated HTML:', subscriptionHtml);
+    document.getElementById('paid').innerHTML = subscriptionHtml;
+  } else {
+    console.error('No subscriptions found');
+    document.getElementById('paid').innerHTML = '<p>Aucun forfait actif</p>';
+  }
+})
 
    .catch(error => {
       console.error('Erreur :', error);
 
     });
-
-  });
-
-});
-
-
 
       
     </script>

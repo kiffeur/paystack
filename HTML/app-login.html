@@ -17,6 +17,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -124,71 +126,81 @@
 
 
     <script>
-        // fonction de login       
-
- document.getElementById('loginForm').addEventListener('submit', async function (e) {
-   e.preventDefault();
-
-   const phone = document.getElementById('phoneNumber').value;
-   const password = document.getElementById('password').value;
-
-   if (!phone || !password) {
-     alert("Veuillez remplir tous les champs");
-    return;
-  }
-localStorage.key
-  try {
-    const response = await fetch('http://localhost:5000/api/users/login', {
-     method: 'POST',
-     headers: {
-        'Content-Type': 'application/json',
-       'Accept': '*/*'
-    },
-     body: JSON.stringify({ phone, password })
-   });
-
-   if (response.ok) {
-      const data = await response.json();
-      const token = data.token;
-      const user = data.user;
-      const userId = user.id;
-      const name = user.name;
-      const phone = user.phone;
-    
-
-        //Store the token in Session Storage
-        
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('phone', phone);
-        localStorage.setItem('name', name);
-        //Log the stored token
-
-       console.log('Token et autres informations ont été stocké en Session Storage:');
-       console.log('token:', token);
-       console.log('et son nom :', name);
-       console.log('et son téléphone', phone);
-
-       alert('Connexion réussie!');
-
-        //Redirection après succès
-        
-       window.location.href = 'index.html';
-
-     } else {
-      const errorData = await response.json();
-      alert('Erreur de connexion: ', errorData.message);
-     }
-  } catch (error) {
-     console.error('Erreur de connexion au serveur:', error);
-    alert('Erreur de connexion au serveur');
-  }
- });
-
-
-
-
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+      
+          const phone = document.getElementById('phoneNumber').value;
+          const password = document.getElementById('password').value;
+      
+          if (!phone || !password) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Champs manquants',
+              text: 'Veuillez remplir tous les champs.',
+              confirmButtonText: 'OK'
+            });
+            return;
+          }
+      
+          try {
+            const response = await fetch('http://localhost:5000/api/users/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+              },
+              body: JSON.stringify({ phone, password })
+            });
+      
+            if (response.ok) {
+              const data = await response.json();
+              const token = data.token;
+              const user = data.user;
+              const userId = user.id;
+              const name = user.name;
+              const phone = user.phone;
+      
+              // Store the token in Session Storage
+              localStorage.setItem('token', token);
+              localStorage.setItem('userId', userId);
+              localStorage.setItem('phone', phone);
+              localStorage.setItem('name', name);
+      
+              console.log('Token et autres informations ont été stockés en Session Storage:');
+              console.log('token:', token);
+              console.log('nom:', name);
+              console.log('téléphone:', phone);
+      
+              Swal.fire({
+                icon: 'success',
+                title: 'Connexion réussie!',
+                text: 'Redirection vers la page d\'accueil...',
+                confirmButtonText: 'OK'
+              }).then(() => {
+                window.location.href = 'index.html';
+              });
+      
+            } else {
+              const errorData = await response.json();
+              Swal.fire({
+                icon: 'error',
+                title: 'Erreur de connexion',
+                text: errorData.message || 'Une erreur est survenue.',
+                confirmButtonText: 'OK'
+              });
+            }
+          } catch (error) {
+            console.error('Erreur de connexion au serveur:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Erreur de connexion',
+              text: error.message || 'Une erreur est survenue lors de la connexion au serveur.',
+              confirmButtonText: 'OK'
+            });
+          }
+        });
       </script>
+      
       
 </body>
 

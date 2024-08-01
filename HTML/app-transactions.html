@@ -14,11 +14,34 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .type-retrait {
+            color: red;
+        }
+        .type-souscription {
+            color: yellow;
+        }
+        .type-recharge {
+            color: green;
+        }
+        .transaction-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .transaction-amount-retrait {
+            color: red;
+        }
+        .transaction-amount-souscription {
+            color: yellow;
+        }
+        .transaction-amount-recharge {
+            color: green;
+        }
+    </style>
     <link rel="manifest" href="__manifest.json">
 </head>
 
 <body>
-
     <!-- loader -->
     <div id="loader">
         <img src="assets/img/loading-icon.png" alt="icon" class="loading-icon">
@@ -38,142 +61,24 @@
     </div>
     <!-- * App Header -->
 
-
     <!-- App Capsule -->
     <div id="appCapsule">
 
         <!-- Transactions -->
         <div class="section mt-2">
-            <div class="section-title">Aujourd'hui</div>
-            <div class="transactions">
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>10-07-2024</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger"> - FCFA 1500</div>
-                    </div>
-                </a>
-                <!-- * item -->
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>09-06-2024</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- FCFA 1500</div>
-                    </div>
-                </a>
-                <!-- * item -->
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/avatar/avatar3.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>09-05-2024</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- FCFA 1500</div>
-                    </div>
-                </a>
-                <!-- * item -->
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/avatar/avatar4.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>05-04-2024</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- FCFA 2000</div>
-                    </div>
-                </a>
-                <!-- * item -->
+            <div id="transactions-container" class="transactions">
+                <!-- Les transactions seront ajoutées ici par JavaScript -->
             </div>
         </div>
         <!-- * Transactions -->
 
-        <!-- Transactions -->
-        <div class="section mt-2">
-            <div class="section-title">Hier</div>
-            <div class="transactions">
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>12-04-2023</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger"> - 3500 FCFA</div>
-                    </div>
-                </a>
-                <!-- * item -->
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>10-04-2023</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger">- 3500 FCFA</div>
-                    </div>
-                </a>
-                <!-- * item -->
-            </div>
-        </div>
-        <!-- * Transactions -->
-
-        <!-- Transactions -->
-        <div class="section mt-2">
-            <div class="section-title">Sep 20, 2020</div>
-            <div class="transactions">
-                <!-- item -->
-                <a href="app-transaction-detail.html" class="item">
-                    <div class="detail">
-                        <img src="assets/img/sample/brand/3.jpg" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>Effectué</strong>
-                            <p>12-09-2023</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger"> - 2600 FCFA</div>
-                    </div>
-                </a>
-                <!-- * item -->
-            </div>
-        </div>
-        <!-- * Transactions -->
-
-        <!-- Transactions -->
-
+        <!-- Charger plus -->
         <div class="section mt-2 mb-2">
             <a href="#" class="btn btn-primary btn-block btn-lg">Charger plus</a>
         </div>
 
-
     </div>
     <!-- * App Capsule -->
-
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
@@ -195,7 +100,6 @@
                 <strong>Forfaits</strong>
             </div>
         </a>
-        
         <a href="app-contact.html" class="item">
             <div class="col">
                 <ion-icon name="call-outline"></ion-icon>
@@ -204,7 +108,6 @@
         </a>
     </div>
     <!-- * App Bottom Menu -->
-
 
     <!-- ========= JS Files =========  -->
     <!-- Bootstrap -->
@@ -216,7 +119,83 @@
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userId = localStorage.getItem('userId'); // Assurez-vous que userId est stocké dans le localStorage
 
+            fetch(`http://localhost:5000/api/users/${userId}/transactions`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Transactions reçues:', data);
+                displayTransactions(data);
+            })
+            .catch(error => {
+                console.error('Erreur :', error);
+            });
+        });
+
+        function displayTransactions(data) {
+            const container = document.getElementById('transactions-container');
+            container.innerHTML = ''; // Vider le conteneur
+
+            if (Array.isArray(data) && data.length > 0) {
+                const transactionsHtml = data.map(transaction => {
+                    const dateFormatted = new Date(transaction.date).toLocaleDateString('fr-FR');
+                    let typeClass = '';
+                    let amountClass = '';
+
+                    switch (transaction.type) {
+                        case 'retrait':
+                            typeClass = 'type-retrait';
+                            amountClass = 'transaction-amount-retrait';
+                            break;
+                        case 'souscription':
+                            typeClass = 'type-souscription';
+                            amountClass = 'transaction-amount-souscription';
+                            break;
+                        case 'recharge':
+                            typeClass = 'type-recharge';
+                            amountClass = 'transaction-amount-recharge';
+                            break;
+                        default:
+                            typeClass = '';
+                            amountClass = '';
+                            break;
+                    }
+
+                    return `
+                        <div class="transaction-item">
+                            <a href="#" class="item">
+                                <div class="detail">
+                                    <div>
+                                        <strong class="${typeClass}">${transaction.type}</strong>
+                                        <p>${transaction.description}</p>
+                                        <p>${dateFormatted}</p>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="price ${amountClass}">${transaction.amount ? transaction.amount + ' FCFA' : 'N/A'}</div>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+                container.innerHTML = transactionsHtml;
+            } else {
+                console.error('No transactions found');
+                container.innerHTML = '<p>Aucune transaction trouvée</p>';
+            }
+        }
+
+
+
+        
+    </script>
 </body>
 
 </html>

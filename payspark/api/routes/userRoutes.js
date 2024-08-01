@@ -7,7 +7,7 @@ const Transaction = require('../models/transaction'); // Ajoutez cette ligne si 
 const router = express.Router();
 
 router.use((req, res, next) => {
-    console.log('CORS middleware executed');
+    //console.log('CORS middleware executed');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();

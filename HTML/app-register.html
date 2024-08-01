@@ -16,6 +16,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <!-- Inclure Axios via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -203,29 +205,34 @@
 <script>
     document.getElementById('registerForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-
-      try{
+  
+      try {
         const name = document.getElementById('name').value;
-      const phone = document.getElementById('phoneNumber').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-      const inviteCode = document.getElementById('referralCode').value;
-
-      if (!name ||!phone ||!password ||!confirmPassword ||!inviteCode) {
-        alert("Veuillez remplir tous les champs");
-        return;
-      }
-
-      if (password!== confirmPassword) {
-        alert("Les mots de passe ne correspondent pas");
-        return;
-      }
-
-      let headerList = {
-                         "Accept": "*/*"
-                     };
-
-
+        const phone = document.getElementById('phoneNumber').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const inviteCode = document.getElementById('referralCode').value;
+  
+        if (!name || !phone || !password || !confirmPassword || !inviteCode) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Champs manquants',
+            text: 'Veuillez remplir tous les champs.',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+  
+        if (password !== confirmPassword) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Erreur de mot de passe',
+            text: 'Les mots de passe ne correspondent pas.',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+  
         const response = await fetch('http://localhost:5000/api/users/register', {
           method: 'POST',
           headers: {
@@ -238,23 +245,38 @@
             inviteCode: inviteCode
           })
         });
-
+  
         if (response.ok) {
           const data = await response.json();
-          alert('Inscription réussie!');
-          window.location.href = 'app-login.html';
+          Swal.fire({
+            icon: 'success',
+            title: 'Inscription réussie!',
+            text: 'Vous allez être redirigé vers la page de connexion.',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            window.location.href = 'app-login.html';
+          });
         } else {
           const errorData = await response.json();
-          alert('Erreur lors de l\'inscription: ', errorData.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur lors de l\'inscription',
+            text: errorData.message || 'Une erreur est survenue.',
+            confirmButtonText: 'OK'
+          });
         }
-      }
-       catch (error) {
+      } catch (error) {
         console.error('Erreur de connexion au serveur:', error);
-        alert('Erreur de connexion au serveur: ', error.message);
-        
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur de connexion',
+          text: error.message || 'Une erreur est survenue lors de la connexion au serveur.',
+          confirmButtonText: 'OK'
+        });
       }
     });
-</script>
+  </script>
+  
 
 
 </body>
