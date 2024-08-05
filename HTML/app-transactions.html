@@ -119,83 +119,79 @@
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const userId = localStorage.getItem('userId'); // Assurez-vous que userId est stocké dans le localStorage
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const userId = sessionStorage.getItem('userId'); // Assurez-vous que userId est stocké dans le sessionStorage
 
-            fetch(`http://localhost:5000/api/users/${userId}/transactions`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Transactions reçues:', data);
-                displayTransactions(data);
-            })
-            .catch(error => {
-                console.error('Erreur :', error);
-            });
-        });
+    axios.get(`http://localhost:5000/api/users/${userId}/transactions`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      const data = response.data;
+      console.log('Transactions reçues:', data);
+      displayTransactions(data);
+    })
+    .catch(error => {
+      console.error('Erreur :', error);
+    });
+  });
 
-        function displayTransactions(data) {
-            const container = document.getElementById('transactions-container');
-            container.innerHTML = ''; // Vider le conteneur
+  function displayTransactions(data) {
+    const container = document.getElementById('transactions-container');
+    container.innerHTML = ''; // Vider le conteneur
 
-            if (Array.isArray(data) && data.length > 0) {
-                const transactionsHtml = data.map(transaction => {
-                    const dateFormatted = new Date(transaction.date).toLocaleDateString('fr-FR');
-                    let typeClass = '';
-                    let amountClass = '';
+    if (Array.isArray(data) && data.length > 0) {
+      const transactionsHtml = data.map(transaction => {
+        const dateFormatted = new Date(transaction.date).toLocaleDateString('fr-FR');
+        let typeClass = '';
+        let amountClass = '';
 
-                    switch (transaction.type) {
-                        case 'retrait':
-                            typeClass = 'type-retrait';
-                            amountClass = 'transaction-amount-retrait';
-                            break;
-                        case 'souscription':
-                            typeClass = 'type-souscription';
-                            amountClass = 'transaction-amount-souscription';
-                            break;
-                        case 'recharge':
-                            typeClass = 'type-recharge';
-                            amountClass = 'transaction-amount-recharge';
-                            break;
-                        default:
-                            typeClass = '';
-                            amountClass = '';
-                            break;
-                    }
-
-                    return `
-                        <div class="transaction-item">
-                            <a href="#" class="item">
-                                <div class="detail">
-                                    <div>
-                                        <strong class="${typeClass}">${transaction.type}</strong>
-                                        <p>${transaction.description}</p>
-                                        <p>${dateFormatted}</p>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="price ${amountClass}">${transaction.amount ? transaction.amount + ' FCFA' : 'N/A'}</div>
-                                </div>
-                            </a>
-                        </div>
-                    `;
-                }).join('');
-                container.innerHTML = transactionsHtml;
-            } else {
-                console.error('No transactions found');
-                container.innerHTML = '<p>Aucune transaction trouvée</p>';
-            }
+        switch (transaction.type) {
+          case 'retrait':
+            typeClass = 'type-retrait';
+            amountClass = 'transaction-amount-retrait';
+            break;
+          case 'souscription':
+            typeClass = 'type-souscription';
+            amountClass = 'transaction-amount-souscription';
+            break;
+          case 'recharge':
+            typeClass = 'type-recharge';
+            amountClass = 'transaction-amount-recharge';
+            break;
+          default:
+            typeClass = '';
+            amountClass = '';
+            break;
         }
 
-
-
-        
-    </script>
+        return `
+          <div class="transaction-item">
+            <a href="#" class="item">
+              <div class="detail">
+                <div>
+                  <strong class="${typeClass}">${transaction.type}</strong>
+                  <p>${transaction.description}</p>
+                  <p>${dateFormatted}</p>
+                </div>
+              </div>
+              <div class="right">
+                <div class="price ${amountClass}">${transaction.amount ? transaction.amount + ' FCFA' : 'N/A'}</div>
+              </div>
+            </a>
+          </div>
+        `;
+      }).join('');
+      container.innerHTML = transactionsHtml;
+    } else {
+      console.error('No transactions found');
+      container.innerHTML = '<p>Aucune transaction trouvée</p>';
+    }
+  }
+</script>
 </body>
 
 </html>

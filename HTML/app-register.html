@@ -199,6 +199,7 @@
 <script src="assets/js/plugins/splide/splide.min.js"></script>
 <!-- Base Js File -->
 <script src="assets/js/base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 
@@ -233,21 +234,14 @@
           return;
         }
   
-        const response = await fetch('http://localhost:5000/api/users/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name,
-            phone: phone,
-            password: password,
-            inviteCode: inviteCode
-          })
+        const response = await axios.post('http://localhost:5000/api/users/register', {
+          name: name,
+          phone: phone,
+          password: password,
+          inviteCode: inviteCode
         });
   
-        if (response.ok) {
-          const data = await response.json();
+        if (response.status === 200) {
           Swal.fire({
             icon: 'success',
             title: 'Inscription réussie!',
@@ -257,11 +251,10 @@
             window.location.href = 'app-login.html';
           });
         } else {
-          const errorData = await response.json();
           Swal.fire({
             icon: 'error',
             title: 'Erreur lors de l\'inscription',
-            text: errorData.message || 'Une erreur est survenue.',
+            text: response.data.message || 'Une erreur est survenue.',
             confirmButtonText: 'OK'
           });
         }
@@ -270,7 +263,7 @@
         Swal.fire({
           icon: 'error',
           title: 'Erreur de connexion',
-          text: error.message || 'Une erreur est survenue lors de la connexion au serveur.',
+          text: error.response ? error.response.data.message : 'Une erreur est survenue lors de la connexion au serveur.',
           confirmButtonText: 'OK'
         });
       }

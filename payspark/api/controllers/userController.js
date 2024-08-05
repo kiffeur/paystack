@@ -79,7 +79,8 @@ exports.loginUser = async (req, res) => {
         id : user._id,
         phone : user.phone,
         name : user.name,
-        password : user.password
+        password : user.password,
+        inviteCode : user.inviteCode
 
       },
   

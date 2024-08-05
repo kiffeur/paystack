@@ -23,7 +23,8 @@
     "live-server": "^1.2.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
-    "node-schedule": "^2.1.1"
+    "node-schedule": "^2.1.1",
+    "payspark": "file:"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

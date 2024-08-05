@@ -114,6 +114,7 @@
     <script src="assets/js/plugins/splide/splide.min.js"></script>
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 
@@ -126,80 +127,71 @@
 
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function (e) {
-          e.preventDefault();
-      
-          const phone = document.getElementById('phoneNumber').value;
-          const password = document.getElementById('password').value;
-      
-          if (!phone || !password) {
+      document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+    
+        const phone = document.getElementById('phoneNumber').value;
+        const password = document.getElementById('password').value;
+    
+        if (!phone || !password) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Champs manquants',
+            text: 'Veuillez remplir tous les champs.',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+    
+        try {
+          const response = await axios.post('http://localhost:5000/api/users/login', { phone, password });
+    
+          if (response.status === 200) {
+            const { token, user } = response.data;
+            const { id: userId, name, phone, inviteCode} = user;
+
+            console.log(response.data);
+    
+            // Store the token in Local Storage
+            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('phone', phone);
+            sessionStorage.setItem('name', name);
+            sessionStorage.setItem('inviteCode', inviteCode);
+    
+            console.log('Token et autres informations ont été stockés en Local Storage:');
+            console.log('token:', token);
+            console.log('nom:', name);
+            console.log('téléphone:', phone);
+    
             Swal.fire({
-              icon: 'warning',
-              title: 'Champs manquants',
-              text: 'Veuillez remplir tous les champs.',
+              icon: 'success',
+              title: 'Connexion réussie!',
+              text: 'Redirection vers la page d\'accueil...',
               confirmButtonText: 'OK'
+            }).then(() => {
+              window.location.href = 'index.html';
             });
-            return;
-          }
-      
-          try {
-            const response = await fetch('http://localhost:5000/api/users/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': '*/*'
-              },
-              body: JSON.stringify({ phone, password })
-            });
-      
-            if (response.ok) {
-              const data = await response.json();
-              const token = data.token;
-              const user = data.user;
-              const userId = user.id;
-              const name = user.name;
-              const phone = user.phone;
-      
-              // Store the token in Session Storage
-              localStorage.setItem('token', token);
-              localStorage.setItem('userId', userId);
-              localStorage.setItem('phone', phone);
-              localStorage.setItem('name', name);
-      
-              console.log('Token et autres informations ont été stockés en Session Storage:');
-              console.log('token:', token);
-              console.log('nom:', name);
-              console.log('téléphone:', phone);
-      
-              Swal.fire({
-                icon: 'success',
-                title: 'Connexion réussie!',
-                text: 'Redirection vers la page d\'accueil...',
-                confirmButtonText: 'OK'
-              }).then(() => {
-                window.location.href = 'index.html';
-              });
-      
-            } else {
-              const errorData = await response.json();
-              Swal.fire({
-                icon: 'error',
-                title: 'Erreur de connexion',
-                text: errorData.message || 'Une erreur est survenue.',
-                confirmButtonText: 'OK'
-              });
-            }
-          } catch (error) {
-            console.error('Erreur de connexion au serveur:', error);
+    
+          } else {
             Swal.fire({
               icon: 'error',
               title: 'Erreur de connexion',
-              text: error.message || 'Une erreur est survenue lors de la connexion au serveur.',
+              text: response.data.message || 'Une erreur est survenue.',
               confirmButtonText: 'OK'
             });
           }
-        });
-      </script>
+        } catch (error) {
+          console.error('Erreur de connexion au serveur:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur de connexion',
+            text: error.response.data.message || 'Une erreur est survenue lors de la connexion au serveur.',
+            confirmButtonText: 'OK'
+          });
+        }
+      });
+    </script>
       
       
 </body>

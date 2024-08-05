@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
@@ -15,6 +14,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body class="bg-white">
@@ -72,9 +73,10 @@
                 <h2 class="mb-2">Scanner le code qr</h2>
                 <p>
                     <div class="link-box">
-                        <a href="votre-lien.html" id="shareLink">https://votre-lien.html</a>
+                        <a href="#" id="shareLink">Lien à copier</a>
                         <button class="btn btn-secondary btn-sm" onclick="copyToClipboard()">Copier le lien</button>
                     </div>
+                    
                     
                     <style>
                     .link-box {
@@ -99,16 +101,7 @@
                     }
                     </style>
                     
-                    <script>
-                    function copyToClipboard() {
-                        const link = document.getElementById("shareLink").href;
-                        navigator.clipboard.writeText(link).then(function() {
-                            alert('Lien copié dans le presse-papier');
-                        }, function(err) {
-                            alert('Erreur lors de la copie du lien : ', err);
-                        });
-                    }
-                    </script>
+                    
                 </p>
             </div>
         </div>
@@ -134,6 +127,57 @@
     <script src="assets/js/plugins/splide/splide.min.js"></script>
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Récupérer le code d'invitation de l'utilisateur à partir du localStorage ou sessionStorage
+    const inviteCode = sessionStorage.getItem('inviteCode');
+    console.log(inviteCode); // Ou utilisez localStorage si nécessaire
+
+    if (!inviteCode) {
+        console.error('Aucun inviteCode trouvé.');
+        return;
+    }
+
+    // Construire le lien avec le code d'invitation comme paramètre
+    const loginPageUrl = `app-register.html?inviteCode=${(inviteCode)}`;
+    
+    // Mettre à jour le lien dans l'élément <a>
+    const shareLinkElement = document.getElementById('shareLink');
+    if (shareLinkElement) {
+        shareLinkElement.href = loginPageUrl;
+        shareLinkElement.textContent = loginPageUrl; // Optionnel : mettre à jour le texte affiché du lien
+    }
+});
+
+function copyToClipboard() {
+    // Récupérer le lien de l'élément <a>
+    const link = document.getElementById('shareLink').href;
+
+    // Utiliser l'API Clipboard pour copier le lien
+    navigator.clipboard.writeText(link)
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Lien copié',
+                text: 'Le lien a été copié dans le presse-papiers.',
+            });
+        })
+        .catch(err => {
+            console.error('Erreur lors de la copie du lien:', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Erreur lors de la copie du lien.',
+            });
+        });
+}
+
+
+
+    </script>
 
 
 </body>

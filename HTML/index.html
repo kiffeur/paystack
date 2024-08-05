@@ -136,72 +136,66 @@
         <!------------------ Formulaire pour le dépot ------------->
         <div class="modal fade action-sheet" id="sendActionSheet" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Recharger le compte</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="action-sheet-content">
-                            <form>
-                                <div class="form-group basic">
-                                    <div class="input-wrapper">
-                                        <label class="label" for="account2">Numéro de dépot</label>
-                                        <select class="form-control custom-select" id="account2">
-                                            <option value="0">Numéro ORANGE : #150*numéro#</option>
-                                            <option value="1">Numéro MTN : #150*numéro#</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <div class="input-wrapper">
-                                        <label class="label" for="text11">ID transaction</label>
-                                        <input type="email" class="form-control" id="transactionId" placeholder="Enter l'ID de la transaction">
-                                        <i class="clear-input">
-                                            <ion-icon name="close-circle"></ion-icon>
-                                        </i>
-                                    </div>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <label class="label">Entrer le montant</label>
-                                    <div class="input-group mb-2">
-                                        <span class="input-group-text" id="basic-addon1">FCFA</span>
-                                        <input type="text" class="form-control" id="amount" placeholder="Entrer le montant"
-                                            value="1500">
-                                    </div>
-                                </div>
-
-                                
-
-
-                                <div class="form-group basic">
-                                    <button type="button" class="btn btn-primary btn-block btn-lg" onclick="handleRecharge()"
-                                        data-bs-dismiss="modal">Effectuer la recharge</button>
-                                </div>
-
-                                <div class="form-group basic">
-                                    <label class="label">Comment Effectuer la recharge ?</label> <br>
-                                    <div class="input-group mb-2">
-                                        <div class="form-control" readonly style="font-size: 12px; text-align: justify;">
-
-                                            1-) Composer le #150#. <br>
-
-                                            2-) Effectuer un dépôt avec votre numéro de connexion, au numéro prévu selon le réseau que vous aurez choisi.<br>
-
-                                            3-)Copier l'ID de la transaction de votre recharge manuel dans le message de validation de votre opérateur.<br>
-
-                                            4-) insérer le dans le champ "ID transaction", ensuite appuyer sur Effectuer la recharge pour valider.<br>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Recharger le compte</h5>
                 </div>
+                <div class="modal-body">
+                  <div class="action-sheet-content">
+                    <form>
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <label class="label" for="account2">Numéro de dépôt</label>
+                          <select class="form-control custom-select" id="account2">
+                            <option value="0">Numéro ORANGE : #150*numéro#</option>
+                            <option value="1">Numéro MTN : #150*numéro#</option>
+                          </select>
+                        </div>
+                      </div>
+          
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <label class="label" for="text11">ID transaction</label>
+                          <input type="text" class="form-control" id="transactionId" placeholder="Entrer l'ID de la transaction">
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+          
+                      <div class="form-group basic">
+                        <label class="label">Entrer le montant</label>
+                        <div class="input-group mb-2">
+                          <span class="input-group-text" id="basic-addon1">FCFA</span>
+                          <input type="text" class="form-control" id="amount" placeholder="Entrer le montant" value="1500">
+                        </div>
+                      </div>
+          
+                      <div class="form-group basic">
+                        <button type="button" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal" onclick="handleRecharge()">
+                          Effectuer la recharge
+                        </button>
+                      </div>
+          
+                      <div class="form-group basic">
+                        <label class="label">Comment Effectuer la recharge ?</label>
+                        <br>
+                        <div class="input-group mb-2">
+                          <div class="form-control" readonly style="font-size: 12px; text-align: justify;">
+                            1-) Composer le #150#. <br>
+                            2-) Effectuer un dépôt avec votre numéro de connexion, au numéro prévu selon le réseau que vous aurez choisi.<br>
+                            3-) Copier l'ID de la transaction de votre recharge manuel dans le message de validation de votre opérateur.<br>
+                            4-) Insérer le dans le champ "ID transaction", ensuite appuyer sur Effectuer la recharge pour valider.<br>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+          
         <!-- Fin formulaire dépot -->
 
 
@@ -456,7 +450,7 @@
                             <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
-                            <strong id="user-name">Sebastian Doe</strong>
+                            <strong id="name">Sebastian Doe</strong>
                             <div class="text-muted" id="phone">4029209</div>
                         </div>
                         <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
@@ -596,331 +590,221 @@
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
     <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const token = sessionStorage.getItem('token');
+  const userId = sessionStorage.getItem('userId');
+  const name = sessionStorage.getItem('name');
+  const phone = sessionStorage.getItem('phone');
 
+  // Rediriger vers la page de connexion si le token n'existe pas
+  if (!token || token === 'undefined' || token === '') {
+    console.log('No token found, redirecting to login page');
+    window.location.href = 'app-login.html';
+    return;
+  }
 
- //------------------------------Début chargement des éléments-------------------------//
-
-const token = localStorage.getItem('token');
-const userId = localStorage.getItem('userId');
-const name = localStorage.getItem('name');
-const phone = localStorage.getItem('phone');
-
-//Sélectionnez tous les éléments de la liste de forfaits
-
-const billBoxes = document.querySelectorAll('.bill-box');
-
-
-// Ajoutez un événement click à chaque élément
-
-billBoxes.forEach((billBox) => {
-
-  billBox.addEventListener('click', () => {
-
-    // Rediriger l'utilisateur vers la page app-bills.html
-
-    window.location.href = 'app-bills.html';
-
+  // Ajoutez un événement click à chaque élément bill-box
+  document.querySelectorAll('.bill-box').forEach((billBox) => {
+    billBox.addEventListener('click', () => {
+      window.location.href = 'app-bills.html';
+    });
   });
 
-});
-
-if (!token || token === 'undefined' || token === '') {
-  console.log('No token found, redirecting to login page');
-  window.location.href = 'app-login.html';
-} else {
-  console.log(" c'est cool c'est passé :)");
-
-  fetch(`http://localhost:5000/api/users/${userId}`, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-       return response.json();
-    } else {
-      throw new Error('API error');
-    }
-  })
-  .then(data => {
-    // console.log('Token is valid!');
-   // console.log(data); // log the user data
-   console.log(data);
-
-    const revenusProjet = data.revenusProjet;
-    const totalRetrait = data.totalRetrait;
-    const invitations = data.invitations;
-    const soldeCompte = data.soldeCompte;
-    const soldeTotal = (soldeCompte + invitations + revenusProjet) - totalRetrait;
-    // console.log('votre nom est :', name + 'votre téléphone :', phone);
-
-    // Update HTML elements with user data
-    const userNameElement = document.getElementById('user-name');
-    const soldeTotalElement = document.getElementById('solde-total');
-    const soldeTotalElement1 = document.getElementById('solde-total1');
-    const revenusProjetElement = document.getElementById('revenusProjet');
-    const totalRetraitElement = document.getElementById('totalRetrait');
-    const invitationsElement = document.getElementById('invitations');
-    const phoneElement = document.getElementById('phone');
-
-    if (userNameElement) {
-      userNameElement.innerHTML = name;
-    }
-    if (soldeTotalElement) {
-      soldeTotalElement.innerHTML = soldeTotal + ' FCFA';
-    }
-    if (soldeTotalElement1) {
-      soldeTotalElement1.innerHTML = soldeTotal + ' FCFA';
-    }
-    if (revenusProjetElement) {
-      revenusProjetElement.innerHTML = revenusProjet;
-    }
-    if (totalRetraitElement) {
-      totalRetraitElement.innerHTML = totalRetrait;
-    }
-    if (invitationsElement) {
-      invitationsElement.innerHTML = invitations;
-    }
-    if (phoneElement) {
-      phoneElement.innerHTML = phone;
-    }
-
-    
-
-    //----------------------------------------------------------------------------------//
-    //------------------------------Fin chargement des éléments-------------------------//
-
-
-
-
-
-
-
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    if (error.status === 401) {
-      console.log('Invalid token, redirecting to login page');
-      window.location.href = 'app-login.html';
-    }
-  });
-}
-
-const transactionsUrl = `http://localhost:5000/api/users/${userId}/transactions`;
-
-// Fonction pour charger les transactions
-async function loadTransactions() {
+  // Fonction pour charger les informations de l'utilisateur
+  const loadUserInfo = async () => {
     try {
-        const response = await fetch(transactionsUrl);
-        const transactions = await response.json();
-        const transactionsContainer = document.querySelector('.transactions');
-        
-        // Effacer le contenu précédent
-        transactionsContainer.innerHTML = '';
-
-        // Obtenez les 3 dernières transactions
-        const latestTransactions = transactions.slice(-3);
-
-        // Itérer sur les transactions et créer les éléments HTML
-        latestTransactions.forEach(transaction => {
-            const transactionItem = document.createElement('a');
-            transactionItem.href = "app-transaction-detail.html";
-            transactionItem.className = 'item';
-
-            const detailDiv = document.createElement('div');
-            detailDiv.className = 'detail';
-
-            const img = document.createElement('img');
-            img.src = 'assets/img/sample/brand/12.png'; // Changez cette source selon vos besoins
-            img.alt = 'img';
-            img.className = 'image-block imaged w48';
-
-            const detailInnerDiv = document.createElement('div');
-
-            const strongText = document.createElement('strong');
-            strongText.textContent = transaction.type; // Vous pouvez changer cela selon vos besoins
-
-            const dateParagraph = document.createElement('p');
-            dateParagraph.textContent = new Date(transaction.date).toLocaleDateString();
-
-            detailInnerDiv.appendChild(strongText);
-            detailInnerDiv.appendChild(dateParagraph);
-
-            detailDiv.appendChild(img);
-            detailDiv.appendChild(detailInnerDiv);
-
-            const rightDiv = document.createElement('div');
-            rightDiv.className = 'right';
-
-            const priceDiv = document.createElement('div');
-            priceDiv.className = 'prix transact';
-            priceDiv.textContent = `- ${transaction.amount} FCFA`; // Supposant que 'amount' est le montant de la transaction
-
-            rightDiv.appendChild(priceDiv);
-
-            transactionItem.appendChild(detailDiv);
-            transactionItem.appendChild(rightDiv);
-
-            transactionsContainer.appendChild(transactionItem);
-        });
-    } catch (error) {
-        console.error('Erreur lors du chargement des transactions:', error);
-    }
-}
-
-// Appeler la fonction pour charger les transactions
-loadTransactions();
-
-
-// Fontion pour effectuer une recharge
-async function handleRecharge() {
-    //const userId = '60d5f4846c7b5b6a8a8e4d3c'; // Remplacez par l'ID de l'utilisateur
-    //const transactionIdElement = document.getElementById('transactionId');
-    const amountElement = document.getElementById('amount');
-    const verificationChainElement = document.getElementById('transactionId');
-
-    // Vérifier si les éléments existent
-    if (!amountElement || !verificationChainElement) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Un élément du formulaire est manquant.',
-        });
-        return;
-    }
-
-    //const transactionId = transactionIdElement.value;
-    const amount = amountElement.value;
-    const verificationChain = verificationChainElement.value;
-
-    // Valider les champs
-    if (!verificationChain || !amount) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Champs manquants',
-            text: 'Veuillez remplir tous les champs.',
-        });
-        return;
-    }
-
-    const url = `http://localhost:5000/api/users/${userId}/recharge`;
-    const data = {
-        transactionId: transactionId,
-        amount: parseInt(amount, 10),
-        verificationChain: verificationChain
-    };
-
-    console.log('Sending data:', data);
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Erreur: ${errorText}`);
+      const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
         }
+      });
+      const data = response.data;
 
-        const result = await response.json();
-        Swal.fire({
-            icon: 'success',
-            title: 'Succès',
-            text: 'Recharge effectuée avec succès!',
-        }).then(() => {
-            // Recharger la page après avoir fermé l'alerte
-            window.location.reload();
-        });
-        console.log(result);
+      const soldeTotal = (data.soldeTotal + data.soldeCompte + data.invitations) - data.totalRetrait;
+      document.getElementById('solde-total').innerHTML = soldeTotal + ' FCFA';
+      document.getElementById('solde-total1').innerHTML = soldeTotal + ' FCFA';
+      document.getElementById('revenusProjet').innerHTML = data.revenusProjet;
+      document.getElementById('totalRetrait').innerHTML = data.totalRetrait;
+      document.getElementById('invitations').innerHTML = data.invitations;
+      document.getElementById('phone').innerHTML = phone;
+      document.getElementById('name').innerHTML = name;
     } catch (error) {
-        console.error('Erreur:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'ID de transaction invalide.',
-        });
+      console.error('Error loading user info:', error);
+      if (error.response && error.response.status === 401) {
+        window.location.href = 'app-login.html';
+      }
     }
-}
+  };
 
+  // Fonction pour charger les transactions
+  const loadTransactions = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/${userId}/transactions`);
+      const transactions = response.data;
+      const transactionsContainer = document.querySelector('.transactions');
+      transactionsContainer.innerHTML = '';
 
-// Fonction pour effectuer un retrait 
-function handleWithdraw() {
-    // Récupérer le montant entré par l'utilisateur
+      const latestTransactions = transactions.slice(-3);
+
+      latestTransactions.forEach(transaction => {
+        const transactionItem = document.createElement('a');
+        transactionItem.href = "app-transaction-detail.html";
+        transactionItem.className = 'item';
+
+        const detailDiv = document.createElement('div');
+        detailDiv.className = 'detail';
+
+        const img = document.createElement('img');
+        img.src = 'assets/img/sample/brand/12.png'; // Changez cette source selon vos besoins
+        img.alt = 'img';
+        img.className = 'image-block imaged w48';
+
+        const detailInnerDiv = document.createElement('div');
+
+        const strongText = document.createElement('strong');
+        strongText.textContent = transaction.type; // Vous pouvez changer cela selon vos besoins
+
+        const dateParagraph = document.createElement('p');
+        dateParagraph.textContent = new Date(transaction.date).toLocaleDateString();
+
+        detailInnerDiv.appendChild(strongText);
+        detailInnerDiv.appendChild(dateParagraph);
+
+        detailDiv.appendChild(img);
+        detailDiv.appendChild(detailInnerDiv);
+
+        const rightDiv = document.createElement('div');
+        rightDiv.className = 'right';
+
+        const priceDiv = document.createElement('div');
+        priceDiv.className = 'prix transact';
+        priceDiv.textContent = `- ${transaction.amount} FCFA`; // Supposant que 'amount' est le montant de la transaction
+
+        rightDiv.appendChild(priceDiv);
+
+        transactionItem.appendChild(detailDiv);
+        transactionItem.appendChild(rightDiv);
+
+        transactionsContainer.appendChild(transactionItem);
+      });
+    } catch (error) {
+      console.error('Erreur lors du chargement des transactions:', error);
+    }
+  };
+
+  // Fonction pour effectuer une recharge
+handleRecharge = async () => {
+  const amountElement = document.getElementById('amount');
+  const verificationChainElement = document.getElementById('transactionId');
+
+  if (!amountElement || !verificationChainElement) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: 'Un élément du formulaire est manquant.',
+    });
+    return;
+  }
+
+  const amount = amountElement.value;
+  const verificationChain = verificationChainElement.value;
+
+  if (!verificationChain || !amount) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Champs manquants',
+      text: 'Veuillez remplir tous les champs.',
+    });
+    return;
+  }
+
+  try {
+    const userId = sessionStorage.getItem('userId'); // Remplacer localStorage par sessionStorage
+    const response = await axios.post(`http://localhost:5000/api/users/${userId}/recharge`, {
+      transactionId: verificationChain,
+      amount: parseInt(amount, 10),
+      verificationChain: verificationChain
+    });
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Succès',
+      text: 'Recharge effectuée avec succès!',
+    }).then(() => {
+      window.location.reload();
+    });
+  } catch (error) {
+    console.error('Erreur:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: 'ID de transaction invalide.',
+    });
+  }
+};
+
+// Ajout d'un écouteur d'événements au bouton après le chargement du DOM
+/*document.addEventListener('DOMContentLoaded', () => {
+  const rechargeButton = document.querySelector('.btn.btn-primary.btn-block.btn-lg');
+  if (rechargeButton) {
+    rechargeButton.addEventListener('click', handleRecharge);
+  }
+});
+*/
+
+  // Fonction pour effectuer un retrait
+   handleWithdraw = async () => {
     const amountInput = document.getElementById('montant');
     const amount = parseInt(amountInput.value, 10);
 
-    // Vérifier que le montant est supérieur ou égal à 2000
     if (isNaN(amount) || amount < 2000) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Le montant minimum de retrait est de 2000 FCFA',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        });
-        return;
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Le montant minimum de retrait est de 2000 FCFA',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6'
+      });
+      return;
     }
 
-    
-
-    // Préparer les données pour la requête
-    const data = {
+    try {
+      const response = await axios.post(`http://localhost:5000/api/users/${userId}/withdraw`, {
         amount: amount
-    };
+      });
 
-    // Envoyer la requête POST à l'API de retrait
-    fetch(`http://localhost:5000/api/users/${userId}/withdraw`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: '200',
-                text: 'Demande de retrait effectuée',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#3085d6'
-            }).then(() => {
-                // Recharger la page après confirmation
-                location.reload();
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Erreur',
-                text: data.message || 'Une erreur est survenue',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#3085d6'
-            });
-        }
-    })
-    .catch(error => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Une erreur est survenue lors de l\'envoi de la requête',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        });
-        console.error('Error:', error);
-    });
-}
+      Swal.fire({
+        icon: 'success',
+        title: '200',
+        text: 'Demande de retrait effectuée',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6'
+      }).then(() => {
+        window.location.href = 'index.html';
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Une erreur est survenue lors de l\'envoi de la requête',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6'
+      });
+      console.error('Error:', error);
+    }
+  };
 
+  // Appeler les fonctions pour charger les données de l'utilisateur et les transactions
+  loadUserInfo();
+  loadTransactions();
+  
+});
+</script>
 
-    </script>
 
 </body>
 
